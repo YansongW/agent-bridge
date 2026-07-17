@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 系统垃圾
+.DS_Store
+
+# 本地私有配置（含真实 IP / 用户名的设备清单不进仓库）
+# config/devices.toml 是模板，提交；如果你的真实清单不想公开，
+# 把它复制为 devices.local.toml 使用（agentctl 会优先读它），本文件已忽略：
+config/devices.local.toml
+
+# 密钥与机密（永远不进仓库）
+*.pem
+*.key
+id_*

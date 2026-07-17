@@ -1,0 +1,28 @@
+# CLI Agent 清单：每个 Agent 一节，名字就是 agentctl agent run 里用的名字。
+#
+# 字段说明：
+#   command     启动这个 Agent 的命令（在目标设备上执行）
+#   workdir     可选：启动前先 cd 到这个目录
+#   description 备注
+#
+# 原理：agentctl 会在目标设备的 tmux 会话里运行 command，
+# 然后把你的任务描述像键盘输入一样“敲”进去。所以这里只填启动命令即可，
+# 交互式的 CLI（kimi / claude / codex ...）都能用。
+
+[kimi]
+command = "kimi"
+description = "Kimi CLI"
+
+# ↓ 以下 Agent 需要在目标设备上安装后才会工作，装好后不用改任何代码。
+
+[claude]
+command = "claude"
+description = "Claude Code（需先在目标设备安装）"
+
+[codex]
+command = "codex"
+description = "OpenAI Codex CLI（需先在目标设备安装）"
+
+[demo]
+command = "cat"
+description = "测试用：原样回显你输入的内容，不消耗任何 API"

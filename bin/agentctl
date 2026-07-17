@@ -1,0 +1,26 @@
+#!/bin/bash
+# agentctl 启动器：找到项目里的 Python 包并运行 CLI。
+# 优先用支持 tomllib 的 Python 3.11+，找不到就用系统 python3
+# （config.py 里有老版本 Python 的回退解析器，照样能跑）。
+set -e
+# 解析符号链接，找到脚本真实位置（install.sh 会把本脚本软链到 ~/.local/bin）
+SRC="${BASH_SOURCE[0]}"
+while [ -L "$SRC" ]; do
+    DIR="$(cd "$(dirname "$SRC")" && pwd)"
+    SRC="$(readlink "$SRC")"
+    [[ "$SRC" != /* ]] && SRC="$DIR/$SRC"
+done
+HERE="$(cd "$(dirname "$SRC")/.." && pwd)"
+
+pick_python() {
+    for py in "$HOME/miniconda3/bin/python3" python3; do
+        if command -v "$py" >/dev/null 2>&1; then
+            echo "$py"
+            return
+        fi
+    done
+    echo "找不到 python3，请先安装 Python 3" >&2
+    exit 1
+}
+
+PYTHONPATH="$HERE" exec "$(pick_python)" -m agentctl.cli "$@"

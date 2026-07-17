@@ -1,0 +1,24 @@
+# 设备清单：每台设备一节，名字就是 agentctl 命令里用的名字。
+#
+# 字段说明：
+#   host        设备的 Tailscale 地址（100.x.x.x），装完 Tailscale 后在 App 里能看到
+#   user        在这台设备上登录用的 macOS 用户名
+#   local       true 表示就是本机，不走 SSH（用于测试）
+#   description 备注，随便写
+
+[localhost]
+host = "127.0.0.1"
+local = true
+description = "本机（回环测试用，不要删）"
+
+# ↓ 示例：异地 Mac mini。把地址和用户名改成你的真实值，去掉每行开头的 # 即可。
+# [mac-mini]
+# host = "100.64.0.2"
+# user = "yansong"
+# description = "异地 Mac mini（主力 Agent 机）"
+
+# ↓ 示例：另一台 MacBook
+# [macbook]
+# host = "100.64.0.3"
+# user = "yansong"
+# description = "随身 MacBook"
