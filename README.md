@@ -4,14 +4,12 @@
 
 **从任何设备，用一条命令，调度异地 Mac 上的 AI CLI Agent。**
 
-*Control coding agents on a remote Mac — Kimi CLI, Claude Code, Codex — from anywhere, with one command.*
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://www.python.org)
 [![Platform](https://img.shields.io/badge/Platform-macOS%20%7C%20iOS-lightgrey.svg)]()
 [![Dependencies](https://img.shields.io/badge/Dependencies-Zero-brightgreen.svg)]()
 
-[English](#english) · [快速开始](#-快速开始) · [命令参考](#-命令参考) · [文档](#-文档)
+[快速开始](#-快速开始) · [命令参考](#-命令参考) · [文档](#-文档) · [English](#english)
 
 </div>
 
@@ -95,7 +93,7 @@ bash scripts/install.sh        # 安装 agentctl 到 ~/.local/bin
 
 ```bash
 agentctl exec localhost "echo hello"          # hello
-agentctl agent run localhost demo "测试"       # demo agent 原样回显，不消耗任何 API
+agentctl agent run localhost demo "测试"       # 演示 Agent 原样回显，不消耗任何 API
 agentctl agent logs localhost <会话名>
 ```
 
