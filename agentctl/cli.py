@@ -7,6 +7,7 @@
   agentctl agent run <设备> <agent> [任务]  启动一个远程 Agent 会话
   agentctl agent sessions <设备>            列出设备上的 Agent 会话
   agentctl agent logs <设备> <会话> [-n N]  查看会话输出
+  agentctl agent send <设备> <会话> <文本...>  往会话里追加输入（多轮对话）
   agentctl agent attach <设备> <会话>       接管会话（交互式）
   agentctl agent stop <设备> <会话>         结束会话
 """
@@ -98,6 +99,14 @@ def cmd_agent_attach(args):
     return 0
 
 
+def cmd_agent_send(args):
+    dev = config.get_device(args.device)
+    text = " ".join(args.text)
+    ok, msg = agents.send(dev, args.session, text)
+    print(msg)
+    return 0 if ok else 1
+
+
 def cmd_agent_stop(args):
     dev = config.get_device(args.device)
     ok, msg = agents.stop(dev, args.session)
@@ -148,6 +157,12 @@ def build_parser():
     sp.add_argument("session")
     sp.set_defaults(func=cmd_agent_attach)
 
+    sp = asub.add_parser("send", help="往会话里追加输入（多轮对话）")
+    sp.add_argument("device")
+    sp.add_argument("session")
+    sp.add_argument("text", nargs=argparse.REMAINDER, help="要发送的文本（/auto 这类斜杠命令也可以）")
+    sp.set_defaults(func=cmd_agent_send)
+
     sp = asub.add_parser("stop", help="结束会话")
     sp.add_argument("device")
     sp.add_argument("session")
@@ -160,6 +175,8 @@ def main(argv=None):
     args = build_parser().parse_args(argv)
     if args.cmd == "exec" and not args.command:
         sys.exit("用法：agentctl exec <设备> <命令...>")
+    if args.cmd == "agent" and args.sub == "send" and not args.text:
+        sys.exit("用法：agentctl agent send <设备> <会话> <文本...>")
     try:
         return args.func(args)
     except KeyboardInterrupt:

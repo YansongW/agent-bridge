@@ -49,6 +49,22 @@ def start(device, agent, prompt=""):
     return True, session
 
 
+def send(device, session, text):
+    """往已有会话里追加输入（多轮对话用），返回 (是否成功, 说明)。
+
+    与 start() 相同的输入方式：文字和回车分两次 send-keys，
+    避免界面未就绪时回车丢失。斜杠命令（如 /auto）原样发送即可。
+    """
+    rc, out = remote.run(device, f"tmux send-keys -t {remote.shq(session)} {remote.shq(text)}")
+    if rc != 0:
+        return False, f"发送失败（会话 {session} 可能已结束）：{out}"
+    time.sleep(1)
+    rc, out = remote.run(device, f"tmux send-keys -t {remote.shq(session)} Enter")
+    if rc != 0:
+        return False, f"回车发送失败：{out}"
+    return True, f"已发送到会话 {session}"
+
+
 def list_sessions(device):
     """列出目标设备上的 tmux 会话，返回 [(会话名, 状态行)]。"""
     rc, out = remote.run(device, "tmux ls 2>&1")

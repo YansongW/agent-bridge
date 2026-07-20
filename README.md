@@ -43,6 +43,7 @@ agentctl agent list                           # 有哪些 Agent 可用
 agentctl agent run mac-mini kimi "总结 ~/notes.txt"   # 派任务给异地 Mac 上的 Kimi
 agentctl agent sessions mac-mini              # 正在跑的 Agent 会话
 agentctl agent logs mac-mini agent-kimi-0716-153000   # 看输出
+agentctl agent send mac-mini agent-kimi-0716-153000 "继续补充第二点"   # 多轮对话：追加输入（也可发 /auto 等命令）
 agentctl agent attach mac-mini agent-kimi-0716-153000 # 接管会话（Ctrl+B 再按 D 退出）
 agentctl agent stop mac-mini agent-kimi-0716-153000   # 结束会话
 ```
@@ -114,6 +115,7 @@ Example:
 ```bash
 agentctl agent run mac-mini kimi "summarize ~/notes.txt"   # dispatch a task
 agentctl agent logs mac-mini <session>                     # read the result
+agentctl agent send mac-mini <session> "elaborate on 2nd point"  # multi-turn follow-up
 agentctl agent attach mac-mini <session>                   # take over interactively
 ```
 

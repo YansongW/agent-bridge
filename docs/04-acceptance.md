@@ -9,6 +9,7 @@
 - [ ] `agentctl exec localhost "echo hello"` 输出 hello
 - [ ] `agentctl agent run localhost kimi "用一句话介绍你自己"` 启动成功
 - [ ] `agentctl agent logs localhost <会话名>` 能看到 Kimi 的输出
+- [ ] `agentctl agent send localhost <会话名> "再说一句"` 能追加输入，`agent logs` 能看到新内容
 - [ ] `agentctl agent stop localhost <会话名>` 能结束会话
 
 ## B. 组网（Tailscale）
@@ -29,6 +30,7 @@
 - [ ] `agentctl agent logs mac-mini <会话名>` 能看到 Kimi 正在/已经输出
 - [ ] **断线续传**：启动一个长任务后，关掉本机终端，重新打开，`agent logs` 依然能看到任务在继续
 - [ ] `agentctl agent attach mac-mini <会话名>` 能进入会话手动输入（按 Ctrl+B 再按 D 退出）
+- [ ] `agentctl agent send mac-mini <会话名> "继续补充"` 后 `agent logs` 能看到新输入被追加执行（多轮对话）
 - [ ] `agentctl agent stop mac-mini <会话名>` 后 `agent sessions` 里会话消失
 
 ## E. 移动端

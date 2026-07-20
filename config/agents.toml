@@ -13,6 +13,10 @@
 command = "kimi"
 description = "Kimi CLI"
 
+[kimi-auto]
+command = "kimi --auto"
+description = "Kimi CLI（auto 模式：自动批准操作，适合远程无人值守任务）"
+
 # ↓ 以下 Agent 需要在目标设备上安装后才会工作，装好后不用改任何代码。
 
 [claude]
