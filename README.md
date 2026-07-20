@@ -33,7 +33,7 @@ $ agentctl devices
 设备            地址                状态
 --------------------------------------------------
 localhost     127.0.0.1         ✅ 在线
-mac-mini      100.102.58.80     ✅ 在线
+mac-mini      100.64.0.2        ✅ 在线
 
 $ agentctl agent run mac-mini kimi "总结 ~/agent-workspace 里的会议纪要"
 已启动会话：agent-kimi-0720-124810
